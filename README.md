@@ -2,8 +2,11 @@
 Full-stack web application using Spring Boot + Semantic UI + thymeleaf + JPA + MySQL + Aspect
 
 Database: MySQL
+
 Back-end: Java + JPA
+
 Back-end between Front-end: Thymeleaf
+
 Front-end:  jQuery Semantic UI
 
 controllers -- src/main/java/com/llg/blog/web/
