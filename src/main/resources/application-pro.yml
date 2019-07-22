@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog/?userUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: llgllg20072396
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#      compare entities between class and database  --update
+#      create new database --create !!
+#      normal  -- none
+logging:
+  level:
+    root: info
+    com.llg: info
+  file: log/blog-pro.log
+server:
+  port:8081
+
+
+

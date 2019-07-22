@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category management</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+<!-- navigation   -->
+<nav th:replace="admin/_fragments :: menu(2)"class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+
+        <div class="ui inverted secondary stackable menu">
+
+            <h2 class="ui teal header">
+                Blog admin
+            </h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>Home</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="mini idea icon"></i>Category</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>Tags</a>
+            <div class="right m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="ui text">
+                        <img src="https://picsum.photos/id/1005/100/100" alt="" class="ui avatar image">
+                        Luguang Liu
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" th:href="@{/admin/logout}" class="item">log off</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <a href="#" class="ui menu toggle black icon button m-top-right m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+
+
+</nav>
+
+<!--second nav-->
+<div class="ui attached pointing menu">
+    <div class="ui container">
+
+        <div class="right menu">
+            <a th:href="@{/admin/types/input}" class="teal item">Add</a>
+            <a th:href="@{/admin/types}"  class="teal active item">List</a>
+        </div>
+
+    </div>
+
+
+</div>
+<!--    content-->
+<div class="m-container m-container-small m-padded-tb-big">
+    <div class="container">
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">Tips:</div>
+            <p th:text="${message}">!</p>
+        </div>
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>name</th>
+                <th>operation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="type,iterStat : ${page.content}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${type.name}">programming</td>
+                <td>
+                    <a th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui basic mini button teal">edit</a>
+                    <a th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui basic mini button red">delete</a>
+
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="6" >
+                    <div class="ui pagination menu" th:if="${page.totalPages}>1">
+
+                        <a th:href="@{/admin/types(page=${page.number}-1)}" class="mini item" th:unless="${page.first}">Previous page</a>
+                        <a th:href="@{/admin/types(page=${page.number}+1)}"class="mini item" th:unless="${page.last}">Next page</a>
+
+                    </div>
+                    <a th:href="@{/admin/types/input}" class="ui mini basic right floated teal button">add</a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+
+</div>
+
+
+
+<!--    footer-->
+
+<footer th.replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../../static/images/wechat.jpeg" class="ui rounded image" alt="" style="width: 100px;">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="three wide column">
+                <h4 class="ui inverted header">News</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">User Story1</a>
+                    <a href="#" class="item">User Story2</a>
+                    <a href="#" class="item">User Story3</a>
+
+                </div>
+            </div>
+            <div class="three wide column">
+                <h5 class="ui inverted header">Contact</h5>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Phone:</a>
+                    <a href="#" class="item">E-mail</a>
+                    <a href="#" class="item">Addr.</a>
+
+                </div>
+            </div>
+
+            <div class="seven wide column">
+
+
+                <h4 class="ui inverted header">About</h4>
+
+                <p class="m-text-thin m-text-spaced m-opcity-mini">This is my website.</p>
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p class="m-text-thin m-text-spaced m-opacity-tiny" align="center">Copyright ©️2019 Designed by Luguang Liu</p>
+    </div>
+
+
+
+</footer>
+<!--/*/<th:block th:replace="_fragments ::script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown')
+        .dropdown({
+            on : 'hover'
+        })
+
+    ;
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .remove();
+
+        });
+
+
+
+
+
+</script>
+
+</body>
+</html>
